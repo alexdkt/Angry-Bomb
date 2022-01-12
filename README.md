@@ -16,10 +16,12 @@ https://39558918.servicio-online.net/angryBomb/
 * Open AngryBomb.rogueScene
 * Enjoy!
 
-* NOTE : To view the camera use the browser (not the Rogue Editor) in HTTPS
+# Notes
+* To view the camera use the browser (not the Rogue Editor) in HTTPS
+* Tested on Chrome (MacOs) and iPhone (Safari)
+* Background from <a href="https://www.freepik.com/vectors/vintage">Vintage vector created by vectorpocket - www.freepik.com</a>
 
 # Rogue Engine
 https://rogueengine.io/
 
 
-* Background from <a href="https://www.freepik.com/vectors/vintage">Vintage vector created by vectorpocket - www.freepik.com</a>
