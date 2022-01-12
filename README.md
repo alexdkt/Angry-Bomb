@@ -4,7 +4,6 @@ Game with the Angry birds mechanics and the use of the webcam made with Rogue En
 ![AngryBomb Sample](https://user-images.githubusercontent.com/3352700/149187364-a3280dfb-80d6-4184-9ae6-1e4f5d4ae175.gif)
 
 # DEMO
-
 https://39558918.servicio-online.net/angryBomb/
 
 # Instructions
@@ -16,6 +15,8 @@ https://39558918.servicio-online.net/angryBomb/
 * In the project view, go to Assets/Scenes/
 * Open AngryBomb.rogueScene
 * Enjoy!
+
+* NOTE : To view the camera use the browser (not the Rogue Editor) in HTTPS
 
 # Rogue Engine
 https://rogueengine.io/
