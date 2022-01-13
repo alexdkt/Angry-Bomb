@@ -2,7 +2,11 @@ import * as RE from 'rogue-engine';
 import DeviceUtils from './Static/DeviceUtils';
 import UiManager from './UiManager.re';
 
+const { Prop } = RE;
+
 export default class ReloadScene extends RE.Component {
+
+  @Prop("Number") indexScene: number = 0;
 
   private reloadBtn: HTMLElement;
   
@@ -15,8 +19,8 @@ export default class ReloadScene extends RE.Component {
       
       this.reloadBtn = document.getElementById('reload-button') as HTMLVideoElement;
   
-      this.reloadBtn.addEventListener(DeviceUtils.getClickEventName(), function(){
-        RE.App.loadScene(0);
+      this.reloadBtn.addEventListener(DeviceUtils.getClickEventName(), () => {
+        RE.App.loadScene(this.indexScene);
       })
     })
  
