@@ -27,31 +27,25 @@ export default class WebcamController extends RE.Component {
 
     if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
 
-      navigator.mediaDevices.getUserMedia({ video: true }).then((stream) => {
+      navigator.mediaDevices.getUserMedia({ video: true }).then((stream) => { // If camera is OK:
         video.srcObject = stream;
+        // Video is loaded and can be played
+        video.addEventListener('loadeddata', () => {
+          this.runEnabledCallbacks();
+        }, false);
         video.play();
 
-        // Release getUserMedia stream when your web page closes. TODO: Not really sure if is needed
-        window.addEventListener("unload", function (event) {
-
-          const tracks = stream.getTracks();
-          tracks.forEach(function (track) {
-            track.stop()
-          })
-          video.srcObject = null;
-          stream = null as unknown as MediaStream;
-        })
-
-        this.runEnabledCallbacks();
-
-      }).catch((err) => {
+      }).catch((err) => { // If camera is not present, show video stream
 
         if (this.videoFallback != "") {
           video.src = this.videoFallback;
           video.crossOrigin = "anonymous";
           video.load();
+          // Video is loaded and can be played
+          video.addEventListener('loadeddata', () => {
+            this.runEnabledCallbacks();
+          }, false);
           video.play();
-          this.runEnabledCallbacks();
         }
       });
     }
