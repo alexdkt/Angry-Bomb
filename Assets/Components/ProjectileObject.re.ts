@@ -24,15 +24,23 @@ export default class ProjectileObject extends RE.Component {
   private rogueDOMrect: any;
   private inputCoordinates: Vector2 = new Vector2(0, 0);
   private startInputCoords: Vector2 = new Vector2();
-  private canDrag: Boolean = false;
+  private isValidTouch: Boolean = false;
   private isTouched: Boolean = false;
   private trajectoryPoints: Object3D[] = [];
   private body: CannonBody;
   private onLaunchCB: (() => void)[] = [];
+  private _mass: number = 1;
+
+  // Public variables
+  public isDragEnabled: Boolean = true;
 
   awake() {
     this.useTouches = DeviceUtils.isMobile();
     this.body = RE.getComponent(CannonBody, this.object3d) as CannonBody;
+    this._mass = this.body.mass;
+
+    // We remove the mass of the object as soon as we start so that it does not move until launch event
+    this.setMassEnabled(false);
   }
 
   start() {
@@ -80,15 +88,23 @@ export default class ProjectileObject extends RE.Component {
     return (this.useTouches) ? RE.Input.touch.touches.length == 0 : RE.Input.mouse.isLeftButtonUp;
   }
 
+  setMassEnabled(enabled: boolean) {
+    this.body.mass = enabled ? this._mass : 0;
+  }
+
 
   update() {
+
+    if (!this.isDragEnabled)
+      return;
+
     this.setInputCoordinates();
 
     // Is input coords touching the bomb?
-    this.canDrag = (this.dragOnTouchScreen) ? true : this.isOverTarget(this.inputCoordinates.x, this.inputCoordinates.y);
+    this.isValidTouch = (this.dragOnTouchScreen) ? true : this.isOverTarget(this.inputCoordinates.x, this.inputCoordinates.y);
 
     // Touchstart
-    if (this.canDrag && this.isKeyPressed()) {
+    if (this.isValidTouch && this.isKeyPressed()) {
       this.isTouched = true;
       this.startInputCoords.copy(this.inputCoordinates);
     }
@@ -101,7 +117,7 @@ export default class ProjectileObject extends RE.Component {
     // Touchend
     if (this.isTouched && this.isKeyReleased()) {
       this.isTouched = false;
-      this.canDrag = false;
+      this.isValidTouch = false;
       this.resetPoints();
       this.launch();
     }
@@ -130,12 +146,14 @@ export default class ProjectileObject extends RE.Component {
     // Get vector impulse
     const vectorImpulse = this.inputCoordinates.sub(this.startInputCoords);
     // Enable mass
-    this.body.mass = 1;
+    this.setMassEnabled(true);
     // Scale vector with launch force and create a Cannon Vec3
     const vec3Impulse = new Vec3(-vectorImpulse.x, vectorImpulse.y, 0).scale(this.body.mass * this.launchForce);
     // Apply bomb impulse
     this.body.body.applyImpulse(vec3Impulse);
-    // Start bomb timer
+    // Disable more draggings:
+    this.isDragEnabled = false;
+    // Run callbacks on launch
     this.runOnLaunchCallbacks();
   }
 
