@@ -14,6 +14,8 @@ export default class ProjectileObject extends RE.Component {
   @Prop("Prefab") pointPrefab: RE.Prefab;
   @Prop("Number") numPoints: number = 10;
   @Prop("Number") launchForce: number = 0.05;
+  @Prop("String") targetName: string = "";
+  @Prop("Boolean") dragOnTouchScreen: Boolean = false;
 
   // Private variables
   private raycaster: Raycaster;
@@ -83,7 +85,7 @@ export default class ProjectileObject extends RE.Component {
     this.setInputCoordinates();
 
     // Is input coords touching the bomb?
-    this.canDrag = this.isOverTarget(this.inputCoordinates.x, this.inputCoordinates.y);
+    this.canDrag = (this.dragOnTouchScreen) ? true : this.isOverTarget(this.inputCoordinates.x, this.inputCoordinates.y);
 
     // Touchstart
     if (this.canDrag && this.isKeyPressed()) {
@@ -153,7 +155,7 @@ export default class ProjectileObject extends RE.Component {
     let isIntersecting = false;
 
     intersects.forEach(element => {
-      if (element.object.name == "BombSphere") {
+      if (element.object.name == this.targetName) {
         isIntersecting = true;
       }
     });
