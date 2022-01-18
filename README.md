@@ -1,5 +1,5 @@
 # Angry-Bomb
-Game with the Angry birds mechanics and the use of the webcam made with Rogue Engine, a ThreeJS based game engine created by [@BeardScript](https://github.com/BeardScript)
+Projectile motion examples made with Rogue Engine, a ThreeJS based game engine created by [@BeardScript](https://github.com/BeardScript)
 
 ![AngryBomb Sample](https://user-images.githubusercontent.com/3352700/149187364-a3280dfb-80d6-4184-9ae6-1e4f5d4ae175.gif)
 
@@ -13,13 +13,13 @@ https://39558918.servicio-online.net/angryBomb/
 * Navigate to the project folder.
 * Select it and click open.
 * In the project view, go to Assets/Scenes/
-* Open AngryBomb.rogueScene
+* Open AngryBomb, VideoBlocks or Basket.rogueScene
 * Enjoy!
 
 # Notes
 * To view the camera use the browser (not the Rogue Editor) in HTTPS
-* Tested on Chrome (MacOs) and iPhone (Safari)
-* Background from <a href="https://www.freepik.com/vectors/vintage">Vintage vector created by vectorpocket - www.freepik.com</a>
+* Tested on Chrome and iPhone (Safari)
+* AngryBomb background model from <a href="https://quaternius.itch.io/platformer-pack">LowPoly Platformer Pack by quaternius</a>
 
 # Rogue Engine
 https://rogueengine.io/
