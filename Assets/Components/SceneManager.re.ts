@@ -16,8 +16,9 @@ export default class SceneManager extends RE.Component {
 
       this.reloadBtn = document.getElementById('reload-button') as HTMLVideoElement;
 
-      this.reloadBtn.addEventListener(DeviceUtils.getClickEventName(), () => {
-
+      this.reloadBtn.addEventListener(DeviceUtils.getClickEventName(), (event) => {
+        // Stop the event from reaching screen
+        event.stopPropagation();
         // Get index of current scene so scene name is always empty
         const indexScene = RE.App.scenes.map(function (e) { return e.uuid; }).indexOf(RE.App.currentScene.uuid);
         RE.App.loadScene(indexScene);
@@ -26,11 +27,11 @@ export default class SceneManager extends RE.Component {
 
       this.nextSceneBtn = document.getElementById('next-button') as HTMLVideoElement;
 
-      this.nextSceneBtn.addEventListener(DeviceUtils.getClickEventName(), () => {
-
+      this.nextSceneBtn.addEventListener(DeviceUtils.getClickEventName(), (event) => {
+        // Stop the event from reaching screen
+        event.stopPropagation();
         // Get index of current scene so scene name is always empty
         const indexScene = RE.App.scenes.map(function (e) { return e.uuid; }).indexOf(RE.App.currentScene.uuid);
-
         const newSceneIndex = (indexScene < RE.App.scenes.length - 1) ? indexScene + 1 : 0;
         RE.App.loadScene(newSceneIndex);
       })
