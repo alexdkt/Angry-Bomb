@@ -18,7 +18,7 @@ https://39558918.servicio-online.net/angryBomb/
 
 # Notes
 * To view the camera use the browser (not the Rogue Editor) in HTTPS
-* Tested on Chrome and iPhone (Safari)
+* Tested on Chrome, Safari, Firefox, Opera & Edge (Desktop, iOS & Android)
 * AngryBomb background model from <a href="https://quaternius.itch.io/platformer-pack">LowPoly Platformer Pack by quaternius</a>
 
 # Rogue Engine
